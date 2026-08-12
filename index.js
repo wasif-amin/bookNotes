@@ -3,7 +3,9 @@ import bodyParser from "body-parser";
 import axios from "axios";
 import pg from "pg";
 import session from "express-session";
-
+import dotenv from "dotenv";
+dotenv.config();
+const adminLoginRoute = process.env.ADMIN_LOGIN_ROUTE;
 const app = express();
 const port = 3000;
 
@@ -44,7 +46,7 @@ async function bookCover(isbn) {
     return null;
   }
 }
-app.get("/wasif-login", (req, res) => {
+app.get(adminLoginRoute, (req, res) => {
   req.session.isAdmin = true;
   res.send("<h1>You are now logged in !</h1><a href='/'>Go to Home</a>");
 });
