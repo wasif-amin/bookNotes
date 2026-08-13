@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import axios from "axios";
 import pg from "pg";
 import session from "express-session";
+import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 dotenv.config();
 const adminLoginRoute = process.env.ADMIN_LOGIN_ROUTE;
@@ -66,6 +67,9 @@ app.get("/", async (req, res) => {
 });
 app.get("/compose", isAdmin, (req, res) => {
   res.render("compose.ejs");
+});
+app.get("/login", (req, res) => {
+  res.render("login.ejs");
 });
 app.post("/new", isAdmin, async (req, res) => {
   const title = req.body.title;
