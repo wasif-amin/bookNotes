@@ -9,13 +9,27 @@ const adminLoginRoute = process.env.ADMIN_LOGIN_ROUTE;
 const app = express();
 const port = 3000;
 
-const db = new pg.Client({
-  user: "postgres",
-  host: "localhost",
-  database: "booknotes",
-  password: "21070212w",
-  port: 5432,
-});
+// const db = new pg.Client({
+//   user: "postgres",
+//   host: "localhost",
+//   database: "booknotes",
+//   password: "21070212w",
+//   port: 5432,
+// });
+const db = process.env.DATABASE_URL
+  ? new pg.Client({
+      connectionString: process.env.DATABASE_URL,
+      ssl: {
+        rejectUnauthorized: false, 
+      },
+    })
+  : new pg.Client({
+      user: "postgres",
+      host: "localhost",
+      database: "booknotes",
+      password: "21070212w",
+      port: 5432,
+    });
 db.connect();
 
 app.use(bodyParser.urlencoded({ extended: true }));
