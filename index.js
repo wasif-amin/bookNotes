@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const adminLoginRoute = process.env.ADMIN_LOGIN_ROUTE;
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // const db = new pg.Client({
 //   user: "postgres",
@@ -20,7 +20,7 @@ const db = process.env.DATABASE_URL
   ? new pg.Client({
       connectionString: process.env.DATABASE_URL,
       ssl: {
-        rejectUnauthorized: false, 
+        rejectUnauthorized: false,
       },
     })
   : new pg.Client({
@@ -130,6 +130,6 @@ app.post("/edit", async (req, res) => {
     res.status(500).send("Database update failed.");
   }
 });
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Server running on port ${port}`);
 });
