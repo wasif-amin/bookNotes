@@ -1,4 +1,4 @@
-body {
+/* body {
 }
 h1 {
   color: salmon;
@@ -65,4 +65,118 @@ button {
 img {
   height: 300px;
   width: 300px;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  max-height: 250px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+.book-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  max-width: 600px;
+  margin: 0 auto 20px auto;
+}
+
+@media (min-width: 600px) {
+  .book-card {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+.card {
+  width: min-content;
+  min-width: 250px;
+  max-width: 350px;
+  padding: 16px;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.card img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 12px;
+} */
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+h1 {
+  color: salmon;
+}
+
+h3 {
+  font-weight: bold;
+  font-size: 22px;
+  margin-top: 0;
+}
+.book-item {
+  border: 1px solid black;
+  width: 100%;            /* Expands up to max-width */
+  max-width: 280px;       /* Keeps card at a clean, fixed width */
+  padding: 16px;
+  margin: 10px 0;
+  box-sizing: border-box; /* Includes padding within the width */
+}
+
+/* Force image to stay strictly inside the card */
+.book-item img {
+  width: 100%;            /* Scales with card width */
+  height: auto;           /* Maintains correct proportions */
+  display: block;
+}
+
+/* Buttons */
+.btn-add {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: salmon;
+  text-decoration: none;
+  color: white;
+  border: 1px solid #ccc;
+}
+
+.btn-add:hover {
+  background-color: #e0e0e0;
+}
+
+.btn-edit {
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: yellow;
+  color: black;
+}
+
+.btn-delete {
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: orange;
+  text-decoration: none;
+  color: black;
+}
+
+button {
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
 }
