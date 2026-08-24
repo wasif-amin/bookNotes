@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import axios from "axios";
 import pg from "pg";
 import session from "express-session";
+import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 dotenv.config();
 const adminLoginRoute = process.env.ADMIN_LOGIN_ROUTE;
@@ -60,10 +61,7 @@ async function bookCover(isbn) {
     return null;
   }
 }
-app.get(adminLoginRoute, (req, res) => {
-  req.session.isAdmin = true;
-  res.send("<h1>You are now logged in !</h1><a href='/'>Go to Home</a>");
-});
+
 function isAdmin(req, res, next) {
   if (req.session && req.session.isAdmin === true) {
     return next();
@@ -80,6 +78,9 @@ app.get("/", async (req, res) => {
 });
 app.get("/compose", isAdmin, (req, res) => {
   res.render("compose.ejs");
+});
+app.get(adminLoginRoute, (req, res) => {
+  res.render("login.ejs");
 });
 app.post("/new", isAdmin, async (req, res) => {
   const title = req.body.title;
@@ -130,6 +131,30 @@ app.post("/edit", async (req, res) => {
     res.status(500).send("Database update failed.");
   }
 });
-app.listen(port, "0.0.0.0", () => {
-  console.log(`Server running on port ${port}`);
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  const adminEmail = process.env.ADMIN_EMAIL;
+  const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
+
+  try {
+    const isEmailValid =
+      email && email.trim().toLowerCase() === adminEmail.toLowerCase();
+
+    const isPasswordValid = await bcrypt.compare(password, adminPasswordHash);
+
+    if (isEmailValid && isPasswordValid) {
+      req.session.isAdmin = true;
+      return res.redirect("/");
+    } else {
+      req.session.isAdmin = false;
+      return res.render("login.ejs", { error: "Invalid email or password." });
+    }
+  } catch (err) {
+    console.error("Error logging in:", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
 });
