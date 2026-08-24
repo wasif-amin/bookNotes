@@ -121,17 +121,16 @@ h3 {
 }
 .book-item {
   border: 1px solid black;
-  width: 100%;            /* Expands up to max-width */
-  max-width: 280px;       /* Keeps card at a clean, fixed width */
+  width: 100%;
+  max-width: 280px;
   padding: 16px;
   margin: 10px 0;
-  box-sizing: border-box; /* Includes padding within the width */
+  box-sizing: border-box;
 }
 
-/* Force image to stay strictly inside the card */
 .book-item img {
-  width: 100%;            /* Scales with card width */
-  height: auto;           /* Maintains correct proportions */
+  width: 100%;
+  height: auto;
   display: block;
 }
 
