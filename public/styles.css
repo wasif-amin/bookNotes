@@ -66,3 +66,18 @@ img {
   height: 290px;
   width: 300px;
 }
+.book-item {
+  border: 1px solid black;
+  width: 100%; 
+  max-width: 280px; 
+  padding: 16px;
+  margin: 10px 0;
+  box-sizing: border-box; 
+}
+
+
+.book-item img {
+  width: 100%; 
+  height: auto; 
+  display: block;
+}
