@@ -1,4 +1,4 @@
-Project: Book Notes: [demo](https://booknotes-lj23.onrender.com)
+Project: Book Notes: [demo](https://booknotes-lj23.onrender.com)*PLEASE ALLOW 1-2 MINUTES FOR SERVER TO LOAD*
 
 
 Description: Dynamic book tracking app where users submit a book name, rating (1-10), description, and ISBN.
